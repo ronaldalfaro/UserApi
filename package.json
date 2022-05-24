@@ -1,0 +1,25 @@
+{
+  "name": "userapi",
+  "version": "1.0.0",
+  "description": "UserApi is used to register and manage users",
+  "main": "app.js",
+  "scripts": {
+    "test": "start:test",
+    "start": "nodemon app.js"
+  },
+  "keywords": [
+    "user",
+    "api"
+  ],
+  "author": "Ronald Alfaro B.",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "~16.0.1",
+    "express": "~4.18.1",
+    "mongoose": "~6.3.4",
+    "validator": "~13.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "~2.0.16"
+  }
+}
