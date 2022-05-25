@@ -18,7 +18,7 @@ router.post('/login', async (req: any, res: any) =>{
     if(!validator.isEmail(req.body.email)) return res.status(400).send({message:'Ingresa un correo electrónico válido'});
         let password = process.env.PASSWORD;
         let email = process.env.EMAIL;
-        if(req.body.email !== email && req.body.password !== password){
+        if(req.body.email !== email || req.body.password !== password){
             return res.status(400).send({message:'Correo electrónico o contraseña no válido'});
         }else{
             const token = jwt.sign({_id: email}, process.env.TOKEN_SECRET as string);
