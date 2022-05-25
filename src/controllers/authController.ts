@@ -1,9 +1,7 @@
-import express, { Express, Request, Response, NextFunction } from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 
-//const {promisify} = require('util');
 const jwt = require('jsonwebtoken');
 
-//module.exports = function(req: Request, res: Response, next) {
 module.exports = function(req: Request, res: Response, next: NextFunction) {
 
     const token = req.header('auth-token');

@@ -1,15 +1,16 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
+
 const router = express.Router();
 const verify = require('../controllers/authController');
 
-//Import User Model
+//User Model
 const User = require('../models/userModel');
 
 //Get all users route
-router.get('/', verify, async (req: any, res: any) =>{
+router.get('/', verify, async (req: Request, res: Response) =>{
     try {
-        const beers = await User.find();
-        res.json(beers);
+        const users = await User.find();
+        res.json(users);
     } catch (error) {
         res.json({
             message:error
@@ -18,7 +19,7 @@ router.get('/', verify, async (req: any, res: any) =>{
 });
 
 //Get a specific user route
-router.get('/:id', verify,async (req: any, res: any) =>{
+router.get('/:id', verify,async (req: Request, res: Response) =>{
     try {
         const user = await User.findOne({_id: req.params.id});
         res.json(user);
@@ -30,8 +31,8 @@ router.get('/:id', verify,async (req: any, res: any) =>{
     
 });
 
-//Submit a user route
-router.post('/', verify,async (req: any, res: any) =>{
+//Add a user route
+router.post('/', verify,async (req: Request, res: Response) =>{
     //console.log(req.body);
     const user = new User({
         id_number: req.body.id_number,
@@ -41,7 +42,7 @@ router.post('/', verify,async (req: any, res: any) =>{
     });
 
     try {
-        const savedBeer = await user.save();
+        const savedUser = await user.save();
         res.json(user);
     } catch (error) {
         res.json({
@@ -51,9 +52,9 @@ router.post('/', verify,async (req: any, res: any) =>{
 });
 
 //Delete a specific user route
-router.delete('/:id', verify,async (req: any, res: any) =>{
+router.delete('/:id', verify,async (req: Request, res: Response) =>{
     try {
-        const removedUser = await User.remove({_id: req.params.id});
+        const removedUser = await User.deleteOne({_id: req.params.id});
         res.json(removedUser);
     } catch (error) {
         res.json({
@@ -64,7 +65,7 @@ router.delete('/:id', verify,async (req: any, res: any) =>{
 });
 
 //Update a specific user route
-router.patch('/:id', verify,async (req: any, res: any) =>{
+router.patch('/:id', verify,async (req: Request, res: Response) =>{
     try {
         const updatedUser = await User.updateOne(
             {_id: req.params.id},
